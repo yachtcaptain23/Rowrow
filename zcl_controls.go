@@ -7,6 +7,42 @@ import (
   "time"
 )
 
+// Message type
+
+type msgTypeEnum uint16
+const (
+  NODE_ACKNOWLEDGE = 0x42 // ???
+  COMMAND = 0x43
+  ACKNOWLEDGE = 0x52 // Daemon response for acknowledge
+)
+
+// Sequence type
+
+type seqEnum uint16
+
+// Command type
+type cmdEnum []uint16
+const (
+  
+)
+
+// Message length type. Variable
+type msgLenEnum uint16
+
+// Payload.
+type payloadEnum uint16
+
+// Net address
+type netAddrEnum [2]uint16
+
+// Long address
+type longAddrEnum []uint16
+
+// Suffix
+type suffix []uint16
+
+// Zigbee Cluster Library
+
 type ZigbeeDriver interface {
   ZclSetOnOff(newValue int, zNode ZigbeeNode) error
   ZclGetOnOff() bool
@@ -20,9 +56,8 @@ type ZigbeePacket struct {
   seq byte
   cmd [2]byte
   msgLen byte
+  // Net address and long address are inside the payload
   payload []byte
-  netAddr [2]byte
-  longAddr [8]byte
 }
 
 type ZigbeeNode struct {
